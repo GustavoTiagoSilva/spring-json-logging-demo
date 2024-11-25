@@ -2,7 +2,6 @@ package com.demo.spring_json_logging_demo.component;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +13,6 @@ public class MyLogger implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        MDC.put("userId", "1");
-        LOGGER.info("Hello structured logging!");
-        MDC.remove("userId");
+        LOGGER.atInfo().setMessage("Hello structured logging!").addKeyValue("userId", "1").log();
     }
 }
